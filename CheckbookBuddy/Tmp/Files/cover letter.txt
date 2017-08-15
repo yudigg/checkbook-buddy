@@ -1,0 +1,17 @@
+ <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+hr@oorah.org
+
+jobs@jolt.mx
+
+eliyahu.hershfeld@streamline.
+
+Dear Mr. Hershfeld,
+
+I got your address from Shaya Tepper, and I was wondering if you had an internship available. I am an eager, diligent, and passionate programmer who took Avrumy Friedman's Software Developement course. I really enjoyed the object-oriented approach of C# on the SS, interacting with the DOM on the client-side with JS, jQuery, and AJAX, and manipulating the SQL Server database. 
+I am confident that with the building blocks and architectural appreciation I received, I will be a productive and valuable asset at Streamline Verify. 
+
+Please observe the attached resume and inspect the latest projects I pushed to GitHub. (Currently I'm working on constructing a website for a local cabinet-dealer company to display their products from database by brand, series, style, door img, full img, and their own work plus ability for logged in  admins to create and edit data. The code so far is at https://github.com/yudigg/Ekb-Cabinets )
+
+http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_carousel2&stacked=h

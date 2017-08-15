@@ -1,0 +1,46 @@
+space in jquerry digs further
+
+admin form
+ dropbox number of people
+  date
+  submmit btn create link
+     date,checkbox 
+(newEvent)GetNewEventId
+CreateEventDetails
+SendEmails
+
+DeleteSignUp
+
+
+
+
+
+user
+
+homePage
+  sign up form
+   link for event
+GetNewEventId
+(new SignUps)SignUpsDetails
+Create notifications
+
+The .prop() method is a convenient way to set the value of properties—especially when setting multiple properties, using values returned by a function, or setting values on multiple elements at once. It should be used when setting selectedIndex, tagName, nodeName, nodeType, ownerDocument, defaultChecked, or defaultSelected. Since jQuery 1.6, these properties can no longer be set with the .attr() method. They do not have corresponding attributes and are only properties.
+
+Properties generally affect the dynamic state of a DOM element without changing the serialized HTML attribute. Examples include the value property of input elements, the disabled property of inputs and buttons, or the checked property of a checkbox. The .prop() method should be used to set disabled and checked instead of the .attr() method. The .val() method should be used for getting and setting value.
+
+$( "input" ).prop( "disabled", false );
+$( "input" ).prop( "checked", true );
+$( "input" ).val( "someValue" );
+$(function () {
+    
+    if (typeof $.cookie('token') === 'undefined'){
+        $('div').show()
+    }
+        
+    
+    $('button').click(function () {
+        $('div').hide(1000);
+        $.cookie("token", 1);
+    })
+
+})

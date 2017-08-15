@@ -1,0 +1,215 @@
+﻿@model  CheckbookBuddy.Models.OrderModel
+
+
+@section Styles{
+    <link href="~/css/uploadFile.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+}
+
+<div class="container" style="background-color:#FFFFCE;">
+    <h1 align="center">
+        <font face="Arial, Helvetica, sans-serif">
+            Checkbook Buddy Application for<br>
+            Balancing Your Checkbook Register
+        </font>
+    </h1>
+    <hr class="style1" />
+    <div align="center">
+        <font size="4" face="Arial, Helvetica, sans-serif">
+            Welcome to the online system that maintains and balances your checkbook
+        </font>
+    </div>
+    <hr class="style1" />
+    <div class="col-md-12 col-sm-6 col-xs-12">
+        <font size="3" face="Arial, Helvetica, sans-serif">
+            In order to service you properly, please ensure you fill out your check register completely. This will enable us to correct any errors.
+        </font>
+        <h4><font face="Arial, Helvetica, sans-serif">Please answer the following:</font></h4>
+        <form id="form1" method="post" action="/home/createOrder" class="form-horizontal">
+            <ol>
+
+                <li>
+
+                    <input type="hidden" name="OrderID" value="@Model.OrderID" />
+                    When has your Check Register been last balanced?
+                    <span class="asteriskField" style="color:red;">
+                        *
+                    </span>
+                    <div class="radio">
+                        <label class="radio">
+                            <input name="LastBalanced" type="radio" value="Last Bank Statement" />
+                            Last Bank Statement
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio">
+                            <input name="LastBalanced" type="radio" value="Two Bank Statements ago" />
+                            Two Bank Statements ago
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio">
+                            <input name="LastBalanced" type="radio" value="A very long time" />
+                            A very long time
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio">
+                            <input name="LastBalanced" type="radio" value="Never" />
+                            Never
+                        </label>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label ">
+                           1. When has your Check Register been last balanced?
+                        </label>
+                        <div class="">
+                            <div class="radio">
+                                <label class="radio">
+                                    <input name="radio" type="radio" value="First Choice" />
+                                    First Choice
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="radio">
+                                    <input name="radio" type="radio" value="Second Choice" />
+                                    Second Choice
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="radio">
+                                    <input name="radio" type="radio" value="Third Choice" />
+                                    Third Choice
+                                </label>
+                            </div>
+                        </div>
+                    </div><div class="form-group form-group-sm">
+                        <label class="control-label ">
+                            When has your Check Register been last balanced?
+                        </label>
+                        <div class="">
+                            <div class="radio">
+                                <label class="radio">
+                                    <input name="radio" type="radio" value="First Choice" />
+                                    First Choice
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="radio">
+                                    <input name="radio" type="radio" value="Second Choice" />
+                                    Second Choice
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="radio">
+                                    <input name="radio" type="radio" value="Third Choice" />
+                                    Third Choice
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    If it was balanced last Bank Statement please state the date and final balance on your register that was used to balance your checkbook and list any transactions that have not yet cleared on your bank statement.
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Final balance:</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="mail">Date:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="mail" name="mail">
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+
+                    Outstanding Transactions that have not yet cleared
+                    <br />
+                    <br />
+                    <table class="table table-bordered table-condensed table-hover table-responsive">
+                        <tr>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Check</th>
+                            <th>Deposit</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" placeholder="Ex: #1234" value="Model.Transactions[0].Description" /></td>
+                            <td><input placeholder="1/1/2017" /></td>
+                            <td><input placeholder="$50.00" /></td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                        </tr>
+                    </table>
+
+                    <br>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label for="foofileuploader">
+                            File input
+                        </label>
+                        <br />
+                        <small id="fileHelp" class="form-text text-muted">Upload your register images and bank statements. You may drag and drop multiple files.</small>
+                        <div id="foofileuploader" aria-describedby="fileHelp">Upload</div>
+                    </div>
+                </li>
+            </ol>
+        </form>
+        @*
+            <font size="3" face="Arial, Helvetica, sans-serif">
+                <br>
+                If you forget to answer a question or provide an invalid response the system will prompt you to make a correction.<br>
+                <br><br>
+                <strong><font color="#0099FF" size="3">Tips for filing:</font></strong><br>
+            </font><font size="3" face="Arial, Helvetica, sans-serif">
+                <ul>
+                    <li><font size="3">If for any reason you cannot complete your certification or will be away from your computer for an extended period of time, please use the EXIT  button to close your application. If you do not click the EXIT button or you are not able to complete the application, your claim will be locked and you will not be able to claim benefits until the next day.<br></font></li>
+                    <br>
+                    <li>
+                        <font size="3">
+                            Upon completing the application, you must select the &quot;Submit&quot;
+                            button. Exiting before submitting the application
+                            will cause the information you entered to be lost. After selecting the
+                            &quot;Submit&quot; button, wait for a confirmation page to appear. When
+                            the confirmation page appears, write down the &quot;Confirmation Number&quot;
+                            or print the confirmation page. If you have provided us an email address your &quot;Confirmation Number&quot; will be emailed to you.<br><br>
+                        </font>
+                    </li>
+                </ul>
+            </font>*@
+        <div class="form-group col-md-offset-1">
+            <button id="submit" class="btn btn-primary btn-lg" name="submit" type="submit" form="form1">
+                Submit
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/js/jquery.uploadfile.js"></script>
+    <script src="~/Scripts/js/upload.js"></script>
+
+}
