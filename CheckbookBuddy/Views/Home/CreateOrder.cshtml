@@ -6,6 +6,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
 }
 
+
 <div class="container" style="background-color:#FFFFCE;">
     <h1 align="center">
         <font face="Arial, Helvetica, sans-serif">
@@ -18,6 +19,13 @@
         <font size="4" face="Arial, Helvetica, sans-serif">
             Welcome to the online system that maintains and balances your checkbook
         </font>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="alert alert-danger" role="alert">
+                You must register or login to use this application!
+                <a href="/" class="alert-link"> - Back To Login - </a>
+            </div>
+        }
     </div>
     <hr class="style1" />
     <div class="col-md-12 col-sm-6 col-xs-12">
@@ -30,7 +38,7 @@
 
                 <li>
 
-                    <input type="hidden" name="OrderID" value="@Model.OrderID" />
+                    <input type="hidden" name="OrderID" id="orderId" value="@Model.OrderID" />
                     When has your Check Register been last balanced?
                     <span class="asteriskField" style="color:red;">
                         *
@@ -60,9 +68,9 @@
                         </label>
                     </div>
                     <br />
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label class="control-label ">
-                           1. When has your Check Register been last balanced?
+                            1. When has your Check Register been last balanced?
                         </label>
                         <div class="">
                             <div class="radio">
@@ -84,31 +92,32 @@
                                 </label>
                             </div>
                         </div>
-                    </div><div class="form-group form-group-sm">
-                        <label class="control-label ">
-                            When has your Check Register been last balanced?
-                        </label>
-                        <div class="">
-                            <div class="radio">
-                                <label class="radio">
-                                    <input name="radio" type="radio" value="First Choice" />
-                                    First Choice
-                                </label>
+                    </div>*@
+                    @*<div class="form-group form-group-sm">
+                            <label class="control-label ">
+                                When has your Check Register been last balanced?
+                            </label>
+                            <div class="">
+                                <div class="radio">
+                                    <label class="radio">
+                                        <input name="radio" type="radio" value="First Choice" />
+                                        First Choice
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="radio">
+                                        <input name="radio" type="radio" value="Second Choice" />
+                                        Second Choice
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="radio">
+                                        <input name="radio" type="radio" value="Third Choice" />
+                                        Third Choice
+                                    </label>
+                                </div>
                             </div>
-                            <div class="radio">
-                                <label class="radio">
-                                    <input name="radio" type="radio" value="Second Choice" />
-                                    Second Choice
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label class="radio">
-                                    <input name="radio" type="radio" value="Third Choice" />
-                                    Third Choice
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                        </div>*@
                 </li>
                 <li>
                     If it was balanced last Bank Statement please state the date and final balance on your register that was used to balance your checkbook and list any transactions that have not yet cleared on your bank statement.
@@ -139,7 +148,7 @@
                             <th>Deposit</th>
                         </tr>
                         <tr>
-                            <td><input type="text" placeholder="Ex: #1234" value="Model.Transactions[0].Description" /></td>
+                            <td><input type="text" placeholder="Ex: #1234" value="" /></td>
                             <td><input placeholder="1/1/2017" /></td>
                             <td><input placeholder="$50.00" /></td>
                             <td><input /></td>
@@ -200,11 +209,24 @@
                     </li>
                 </ul>
             </font>*@
-        <div class="form-group col-md-offset-1">
-            <button id="submit" class="btn btn-primary btn-lg" name="submit" type="submit" form="form1">
-                Submit
-            </button>
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="form-group col-md-offset-1">
+                <button id="submit" class="btn btn-primary btn-lg" name="submit" type="submit" form="form1">
+                    Submit
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="form-group col-md-offset-1">
+                <span class="help-block" style="color:red;">You must register or login to enable this button.</span>
+                <button id="submit" class="btn btn-primary btn-lg" name="submit" type="submit" form="form1" disabled s>
+                    Submit
+                </button>
+            </div>
+        }
+      
     </div>
 </div>
 

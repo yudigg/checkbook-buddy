@@ -39,8 +39,8 @@ namespace CheckbookBuddy.Controllers
                 return Json("Error");
             }
             var id = (FormsIdentity)User.Identity;
-           var ticket = id.Ticket;
-          
+            var ticket = id.Ticket;
+
             try
             {
                 HttpPostedFileBase hpf = HttpContext.Request.Files["file"] as HttpPostedFileBase;
@@ -64,18 +64,18 @@ namespace CheckbookBuddy.Controllers
         public ActionResult Send(int orderId)
         {
             try
-            {              
-              var order = orderRepo.GetOrder(orderId);//check for null!
+            {
+                var order = orderRepo.GetOrder(orderId);//check for null!
                 orderRepo.GetImagePaths(orderId);
                 List<string> paths = orderRepo.GetImagePaths(orderId);
-           
-                    using (var mailMessage = new MailMessage())
-                    {
-                        mailMessage.From = new MailAddress("ygoldgrab@gmail.com");
-                        mailMessage.Subject = "Test Email From App";
-                        mailMessage.Body = "This is a test email with attachment";
-                        mailMessage.IsBodyHtml = true;
-                        mailMessage.To.Add(new MailAddress("ygoldgrab@gmail.com"));
+
+                using (var mailMessage = new MailMessage())
+                {
+                    mailMessage.From = new MailAddress("ygoldgrab@gmail.com");
+                    mailMessage.Subject = "Test Email From App";
+                    mailMessage.Body = "This is a test email with attachment";
+                    mailMessage.IsBodyHtml = true;
+                    mailMessage.To.Add(new MailAddress("ygoldgrab@gmail.com"));
                     //Add input file stream as attachment here and send the mail
                     foreach (string file in paths)
                     {
@@ -95,14 +95,14 @@ namespace CheckbookBuddy.Controllers
                     {
                         UserName = mailMessage.From.Address,
                         Password = emailValue
-                        };
-                        smtp.UseDefaultCredentials = true;
-                        smtp.Credentials = networkCred;
-                        smtp.Port = 587;
-                        smtp.Send(mailMessage);
-                    }
-                  
-                
+                    };
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = networkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mailMessage);
+                }
+
+
                 var msg = new { msg = "File Uploaded" };
 
                 return Json(msg);
@@ -120,10 +120,10 @@ namespace CheckbookBuddy.Controllers
         [HttpPost]
         public ActionResult Register(string username, string password)
         {
-            userMgr.AddUser(username, password);         
-            SetupFormsAuthTicket(username);           
+            userMgr.AddUser(username, password);
+            SetupFormsAuthTicket(username);
             return RedirectToAction("Index");
-        }      
+        }
 
         [HttpPost]
         public ActionResult Login(string username, string password)
@@ -142,7 +142,7 @@ namespace CheckbookBuddy.Controllers
                 /////
             }
 
-                SetupFormsAuthTicket(username);
+            SetupFormsAuthTicket(username);
             return RedirectToAction("Index");
         }
 
@@ -154,11 +154,15 @@ namespace CheckbookBuddy.Controllers
 
         public ActionResult Index()
         {
+            if(TempData["SuccessMsg"] != null)
+            {
+
+            }
             if (User.Identity.IsAuthenticated)
             {
-               
+
             }
-                return View();
+            return View();
         }
 
         public ActionResult CreateOrder()
@@ -168,32 +172,34 @@ namespace CheckbookBuddy.Controllers
                 var identity = (FormsIdentity)User.Identity;
                 var ticketId = identity.Ticket;
                 var userID = int.Parse(ticketId.UserData);
-               var orderID = orderRepo.CreateOrder(new Order { UserID = userID });
+                var orderID = orderRepo.CreateOrder(new Order { UserID = userID });
                 OrderModel o = new OrderModel { OrderID = orderID };
                 return View(o);
             }
             else
             {
-                return View("Error");
-            }          
+                return View(new OrderModel());
+            }
         }
 
         [HttpPost]
         public ActionResult CreateOrder(OrderModel om)
         {
-       
-            Order o = new Order { OrderID = om.OrderID, };
-           Questionnaire q= new Questionnaire { LastBalanced = om.LastBalanced, FinalRegisterDate = om.FinalRegisterDate, FinalRegisterBalance = om.FinalRegisterBalance, ErrorCorrection = om.ErrorCorrection };
 
-            orderRepo.UpdateOrder(o,q);
+            Order o = new Order { OrderID = om.OrderID, };
+            Questionnaire q = new Questionnaire { LastBalanced = om.LastBalanced, FinalRegisterDate = om.FinalRegisterDate, FinalRegisterBalance = om.FinalRegisterBalance, ErrorCorrection = om.ErrorCorrection };
+
+            orderRepo.UpdateOrder(o, q);
             // add order fields to order entity -- needs transactions-- questions done --
             // add files..  -- already added by upload
             // save order to db
             //send emails async?
             //set temp data for success message
+            Send(o.OrderID);
+            TempData["SuccessMsg"] = true;
             return RedirectToAction("Index");
         }
-      
+
 
         private User SetupFormsAuthTicket(string userName)
         {

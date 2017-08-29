@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
-
+    var orderId = $("#orderId").val();
     $("#foofileuploader").uploadFile({
-        url: "../Home/UploadFile?orderId=" + 1 + "&person=" + 7,
+        url: "../Home/UploadFile?orderId=" + orderId + "&person=" + 7,
         statusBarWidth: '380',
         dragdropWidth: '380',
         showDelete: true,

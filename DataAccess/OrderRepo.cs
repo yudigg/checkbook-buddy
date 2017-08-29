@@ -35,6 +35,7 @@ namespace DataAccess
             using(CheckingContext db = new CheckingContext(_connectionString))
             {
               o = db.Orders.Find(orderId);
+                var email = o.User.UserName;
             }
             return o;
         }
